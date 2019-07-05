@@ -1,0 +1,45 @@
+
+<div id="container">
+
+  <header>
+      <h1>Client List</h1>
+      <!-- <h1>Order List</h1> -->
+  </header>
+<div id="body">
+  <div id="client-list">
+    <p-table [columns]="cols" [value]="clients" >
+      <ng-template pTemplate="header">
+          <tr>
+              <th>WeChatId</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Last Order Date</th>
+              <th [ngStyle]="{'width': '30%'}">History</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-client>
+          <tr>
+              <td>{{client.wechatId}}</td>
+              <td>{{client.name}}</td>
+              <td>{{client.university}}</td>
+              <td>{{client.createdDate}}</td>
+              <td>
+                <p-splitButton id="orderDetail" 
+                [model]="orderDetail"
+                icon="pi pi-check"  label="Details"
+                (onDropdownClick)='openDropDownList()'
+                (onClick)='openOrderDetail(client.wechatId)'
+                [model]="items"
+                ></p-splitButton>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  </div>
+
+<!-- <div id="order-list" *ngIf='orderDetailFlag'>
+  AAAAAAA
+</div> -->
+
+</div>
+</div>
