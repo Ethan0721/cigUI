@@ -28,9 +28,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              
+            ]
           },
           "configurations": {
             "production": {
@@ -115,6 +120,119 @@
           "configurations": {
             "production": {
               "devServerTarget": "cigUI:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "cig": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/cig",
+      "sourceRoot": "projects/cig/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/cig",
+            "index": "projects/cig/src/index.html",
+            "main": "projects/cig/src/main.ts",
+            "polyfills": "projects/cig/src/polyfills.ts",
+            "tsConfig": "projects/cig/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/cig/src/favicon.ico",
+              "projects/cig/src/assets"
+            ],
+            "styles": [
+              "projects/cig/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/cig/src/environments/environment.ts",
+                  "with": "projects/cig/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cig:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cig:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cig:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cig/src/test.ts",
+            "polyfills": "projects/cig/src/polyfills.ts",
+            "tsConfig": "projects/cig/tsconfig.spec.json",
+            "karmaConfig": "projects/cig/karma.conf.js",
+            "assets": [
+              "projects/cig/src/favicon.ico",
+              "projects/cig/src/assets"
+            ],
+            "styles": [
+              "projects/cig/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cig/tsconfig.app.json",
+              "projects/cig/tsconfig.spec.json",
+              "projects/cig/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/cig/e2e/protractor.conf.js",
+            "devServerTarget": "cig:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cig:serve:production"
             }
           }
         }
