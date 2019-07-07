@@ -25,3 +25,16 @@ export class orderDetail{
 export class MenuItem{
     
 }
+
+export interface Cig{
+    name:string,
+    country:string;
+    brand?: string;
+}
+
+
+export interface DropDownItem {
+    id: number;
+    value: string;
+    code?: string
+}

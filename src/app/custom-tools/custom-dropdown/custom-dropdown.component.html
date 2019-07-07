@@ -1,0 +1,29 @@
+<!-- <div id="dd" class="custom-select" styple="width:200px;" tabindex="1">
+    <select class="dropdown">
+        <option [(ngModel)]="selectedValue"  *ngFor="let d of dropDownList" ngDefaultControl >
+            {{d.value}}
+        </option>
+    </select>            
+
+    {{selectedValue}}
+    <ul class="dropdown">
+        <li *ngFor="let d of dropDownList">
+            <a href="#"><i class="icon-envelope icon-large"></i>{{d.value}}</a>
+        </li>
+        <li><a href="#"><i class="icon-truck icon-large"></i>UPS Delivery</a></li>
+        <li><a href="#"><i class="icon-plane icon-large"></i>Private jet</a></li>
+    </ul> -->
+<!-- </div> -->
+<!-- {{message}}
+<button (click)="newMessage()">New Message</button> -->
+
+<!-- <button (click)="newViewCode()">New view Code</button>
+{{viewCode}} -->
+
+<p-dropdown 
+    [options]="dropDownList" 
+    [(ngModel)]="selectedValue"  
+    optionLabel="value"
+    (ngModelChange)="sendDropDownEvent()"
+>
+</p-dropdown>
