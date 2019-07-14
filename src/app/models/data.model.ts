@@ -1,8 +1,8 @@
-export class Client {
+export interface Client {
     wechatId: string;
     name?: string;
     gender?: string;
-    orderHistory?: orderHistory[];
+    orderHistory?: OrderHistory[];
     university?: string;
     address?: any;
     friends?: any;
@@ -10,14 +10,14 @@ export class Client {
     createdDate?: Date | number;
 }
 
-export class orderHistory{
+export interface OrderHistory{
     orderDate: Date | number;
     income: number;
     totalQuantity: number;
-    detail: orderDetail[]
+    detail: OrderDetail[]
 }
 
-export class orderDetail{
+export interface OrderDetail{
     country: string;
     number: number;
     name: string;

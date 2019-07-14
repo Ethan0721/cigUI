@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ClientsComponent } from './page-views/clients/clients.component';
 import { AppRoutingModule } from './app-routing.module';
-import {TableModule} from 'primeng/table';
-import {SplitButtonModule} from 'primeng/splitbutton';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TableModule} from 'primeng/table';
+import { SplitButtonModule} from 'primeng/splitbutton';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OrdersComponent } from './page-views/orders/orders.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomDropdownComponent } from './custom-tools/custom-dropdown/custom-dropdown.component';
@@ -16,7 +16,14 @@ import { CustomToolsComponent } from './custom-tools/custom-tools.component';
 import { FormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {ToastModule} from 'primeng/toast';
+import { RouterModule, Routes } from '@angular/router';
+import { ClientDetailComponent } from './page-views/clients/client-detail/client-detail.component';
 
+const appRoutes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: "client",component: ClientsComponent}
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +33,7 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
     PageViewsComponent,
     CigrattesComponent,
     CustomToolsComponent,
+    ClientDetailComponent,
     ],
   imports: [
     AppRoutingModule,
@@ -37,9 +45,15 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
     HttpClientModule,
     FormsModule,
     DropdownModule,
-    VirtualScrollerModule
+    VirtualScrollerModule,
+    ToastModule,
+    [RouterModule.forRoot(appRoutes)],
+  ],
+  exports:[
+    RouterModule
   ],
   providers: [],
-  bootstrap: [AppComponent]  
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../../models/data.model';
 import { ClientsService } from '../../shared-services/clients.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { RouterModule, Routes } from '@angular/router';
+
 // import { CustomDropdownComponent } from '../../custom-tools/custom-dropdown/custom-dropdown.component';
 @Component({
   selector: 'app-clients',
@@ -38,6 +40,7 @@ export class ClientsComponent implements OnInit {
         this.orderDetail = res.data;
         console.log('order id '+ id);
         console.log('order details ', this.orderDetail);
+        // this.router.navigate([`${pageName}`]);
       }
     })
     this.orderDetailFlag = !this.orderDetailFlag;
