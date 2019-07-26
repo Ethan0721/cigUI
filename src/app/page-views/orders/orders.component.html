@@ -1,3 +1,27 @@
-<p>
-  orders works!
-</p>
+<div id="body">
+    <div id="client-list">
+      <p-table [value]="orderHistroy" [paginator]="true" [rows]="15">
+        <ng-template pTemplate="header">
+            <tr [pSelectableRow]="rowData">
+                <!-- <th [ngStyle]="{'width': '30%'}">Order</th> -->
+                <th *ngFor="let col of cols" let i=index; >
+                  {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+            <tr>
+                <td>{{order.orderDate*1000 | date:'MM/dd/yyyy' }}</td>
+                <td>{{order.info}}</td>
+                <td>${{order.income}}</td>    
+                <td>{{order.wechatId}}({{order.userName}})</td>              
+                <td [ngStyle]="{'width': '30%'}">{{order.totalQuantity}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            There are {{orderHistroy?.length}} orders
+        </ng-template>
+    </p-table>
+    </div>
+  </div>
+  

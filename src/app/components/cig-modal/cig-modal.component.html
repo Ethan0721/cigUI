@@ -1,0 +1,22 @@
+<p-dialog
+    class="p-dialog"
+    [(visible)]="visible"
+    [modal]="modal"
+    [showHeader]="showHeader"
+    [style]="{'width.px': width, 'height.px': height}"
+    [dismissableMask]="dismissableMask"
+    [closeOnEscape]="closeOnEscape"
+    baseZIndex="2"
+>
+    <header *ngIf="title">
+        <span>{{topTitle}}</span>
+        <h3>{{title}}</h3>
+        <p *ngIf="subTitle">{{subTitle}}</p>
+    </header>
+    
+    <div class="cig-dialog-body">
+        <ng-content></ng-content>
+    </div>
+
+    <ng-content select="footer"></ng-content>
+</p-dialog>

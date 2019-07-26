@@ -1,31 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ClientsComponent } from './page-views/clients/clients.component';
 import { AppRoutingModule } from './app-routing.module';
-import {TableModule} from 'primeng/table';
-import {SplitButtonModule} from 'primeng/splitbutton';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TableModule} from 'primeng/table';
+import { SplitButtonModule} from 'primeng/splitbutton';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OrdersComponent } from './page-views/orders/orders.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CustomDropdownComponent } from './custom-tools/custom-dropdown/custom-dropdown.component';
+import { CigDropdownComponent } from './components/cig-dropdown/cig-dropdown.component';
 import { PageViewsComponent } from './page-views/page-views.component';
 import { CigrattesComponent } from './page-views/cigrattes/cigrattes.component';
-import { CustomToolsComponent } from './custom-tools/custom-tools.component';
+import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {ToastModule} from 'primeng/toast';
+import { RouterModule, Routes } from '@angular/router';
+import {TreeTableModule} from 'primeng/treetable';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { CigModalComponent } from './components/cig-modal/cig-modal.component';
+import {DialogModule} from 'primeng/dialog';
+import { CigTextComponent } from './components/cig-text/cig-text.component';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
+const appRoutes: Routes = [
+  {path: '', component: PageViewsComponent},
+  {
+    path: 'client',
+    children:[
+      {path: '',component: ClientsComponent},
+      // {path: ':id', component: ClientDetailComponent}
+    ]
+  }
+];
 @NgModule({
   declarations: [
     AppComponent,
     ClientsComponent,
     OrdersComponent,
-    CustomDropdownComponent,
+    CigDropdownComponent,
     PageViewsComponent,
     CigrattesComponent,
-    CustomToolsComponent,
+    // CustomToolsComponent,
+    CigModalComponent,
+    CigTextComponent,
     ],
   imports: [
     AppRoutingModule,
@@ -37,9 +57,20 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
     HttpClientModule,
     FormsModule,
     DropdownModule,
-    VirtualScrollerModule
+    VirtualScrollerModule,
+    RadioButtonModule,
+    ToastModule,
+    TreeTableModule,
+    DynamicDialogModule,
+    DialogModule,
+    CalendarModule,
+    [RouterModule.forRoot(appRoutes)],
+  ],
+  exports:[
+    RouterModule
   ],
   providers: [],
-  bootstrap: [AppComponent]  
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

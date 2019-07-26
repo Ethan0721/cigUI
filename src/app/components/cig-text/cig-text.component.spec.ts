@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomToolsComponent } from './custom-tools.component';
+import { CigTextComponent } from './cig-text.component';
 
-describe('CustomToolsComponent', () => {
-  let component: CustomToolsComponent;
-  let fixture: ComponentFixture<CustomToolsComponent>;
+describe('CigTextComponent', () => {
+  let component: CigTextComponent;
+  let fixture: ComponentFixture<CigTextComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomToolsComponent ]
+      declarations: [ CigTextComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CustomToolsComponent);
+    fixture = TestBed.createComponent(CigTextComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

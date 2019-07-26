@@ -10,10 +10,11 @@ export class CigsService {
   
   constructor(private http: HttpClient) { }
   
-  getCigs(){
-    // const clientUrl = '/cig/users';
-    // let url = this.baseUrl + clientUrl; 
-    // return this.http.get(url);
+  public getCigs(){
+    const cigUrl = '/cig';
+    let url = this.baseUrl + cigUrl; 
+    return this.http.get(url);
   }
+  
 
 }
