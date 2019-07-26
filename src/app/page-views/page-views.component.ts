@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {DataService} from '../shared-services/data.service';
 import {DropDownItem} from '../models/data.model';
-import {CustomDropdownComponent} from '../custom-tools/custom-dropdown/custom-dropdown.component';
+import {CigDropdownComponent} from '../components/cig-dropdown/cig-dropdown.component';
 
 @Component({
   selector: 'app-page-views',
@@ -9,9 +9,9 @@ import {CustomDropdownComponent} from '../custom-tools/custom-dropdown/custom-dr
   styleUrls: ['./page-views.component.less']
 })
 export class PageViewsComponent implements OnInit {
-  DEFAULT_PAGE = 1;
+  DEFAULT_PAGE = 0;
   dropDownList : DropDownItem[] = [
-    {id: 1, value:"Client List", code:"CLIENT"},
+    {id: 1, value:"Client", code:"CLIENT"},
     {id: 2, value:"Order List", code:"ORDER"},
     {id: 3, value:"Cig List", code:"CIG"}
   ];

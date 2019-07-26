@@ -1,20 +1,20 @@
 <div id="container">
     <header>
         <h3>{{viewValue}}</h3>
-        <a [routerLink]="['/client']"> UUU </a>
-        <app-custom-dropdown 
+        <app-cig-dropdown 
                 [dropDownList]="dropDownList"
                 [selectedValue]="selectedValue"
                 (dropDownEvent)="receiveDropDownEvent($event)"
-        ></app-custom-dropdown>
+        ></app-cig-dropdown>
     </header>
     <div id="body">
-        <!-- <div id="dd">    
-        </div> -->
         <div id="content">
-            <app-clients *ngIf="viewCode === 'CLIENT'"></app-clients>
+            <div *ngIf="viewCode === 'CLIENT'">
+                <app-clients></app-clients>                
+            </div>            
             <app-orders *ngIf="viewCode === 'ORDER'"></app-orders>
             <app-cigrattes *ngIf="viewCode === 'CIG'"></app-cigrattes>
+            
         </div>
     </div>
     <footer>

@@ -5,10 +5,10 @@ import { OrderHistory } from '../../models/data.model';
 // import { orderDetail } from '../../models/data.model';
 import * as _ from 'lodash';
 
-interface PerOrder {
-  quantity: number;
-  name: string;
-}
+// interface PerOrder {
+//   quantity: number;
+//   name: string;
+// }
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -17,13 +17,13 @@ interface PerOrder {
 export class OrdersComponent implements OnInit {
 
   public orderHistroy: OrderHistory[];
-  orderDetail = [];
+  // orderDetail = [];
   cols : any[];
   // orderMap = new Map();
   constructor(private orderService : OrdersService) {}
 
   ngOnInit() {
-    let orderInfo=[];
+    // let orderInfo=[];
     this.cols = [
       { field: 'date', header: 'Order Date' },
       { field: 'detail', header: 'Order Detail' },
@@ -40,7 +40,7 @@ export class OrdersComponent implements OnInit {
       _.map(this.orderHistroy, function(orders){
         let str = '';
         _.map(orders.detail, function(order){
-          str = str + order.number + ' ' + order.name + ', ';
+          str = str + order.count + ' ' + order.name + ', ';
         })
         str = str.substring(0,str.length-2);
         orders['info'] = str;

@@ -4,12 +4,12 @@ import {DataService} from '../../shared-services/data.service';
 import { DropDownItem} from '../../models/data.model';
 
 @Component({
-  selector: 'app-custom-dropdown',
-  templateUrl: './custom-dropdown.component.html',
-  styleUrls: ['./custom-dropdown.component.less']
+  selector: 'app-cig-dropdown',
+  templateUrl: './cig-dropdown.component.html',
+  styleUrls: ['./cig-dropdown.component.less']
 })
 
-export class CustomDropdownComponent implements OnInit {
+export class CigDropdownComponent implements OnInit {
   // viewCode: string;
   @Input() dropDownList : DropDownItem[];
   @Input() selectedValue : DropDownItem;

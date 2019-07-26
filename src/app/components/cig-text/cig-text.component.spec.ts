@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClientDetailComponent } from './client-detail.component';
+import { CigTextComponent } from './cig-text.component';
 
-describe('ClientDetailComponent', () => {
-  let component: ClientDetailComponent;
-  let fixture: ComponentFixture<ClientDetailComponent>;
+describe('CigTextComponent', () => {
+  let component: CigTextComponent;
+  let fixture: ComponentFixture<CigTextComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientDetailComponent ]
+      declarations: [ CigTextComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClientDetailComponent);
+    fixture = TestBed.createComponent(CigTextComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

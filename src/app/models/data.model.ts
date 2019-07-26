@@ -8,6 +8,7 @@ export interface Client {
     friends?: any;
     status?: string;
     createdDate?: Date | number;
+    favourites?: Cig[];
 }
 
 export interface OrderHistory{
@@ -19,7 +20,7 @@ export interface OrderHistory{
 
 export interface OrderDetail{
     country: string;
-    number: number;
+    count: number;
     name: string;
 }
 export class MenuItem{
