@@ -1,6 +1,5 @@
-
-  <div class="get-client-list">
-    <a (click)="switchPage('CLIENT_LIST')" href="#">Client List >> </a>
+<div class="get-client-list">
+    <a (click)="switchPage('CLIENT_LIST')" href="#">Client List >> </a>  <button (click)="createUser()">Create</button>
     <p-table [columns]="cols" [value]="clients" *ngIf="clientAction==='CLIENT_LIST'" class="client-table">
       <ng-template pTemplate="header">
           <tr>
@@ -21,13 +20,13 @@
               </td>
               <td>{{client.name}}</td>
               <td>{{client.university}}</td>
-              <td>{{client.createdDate*1000 | date:'MM/dd/yyyy'}}</td>
+              <td>{{client.createdDate | date:'MM/dd/yyyy'}}</td>
               <td>
                 <!-- <a (click)="switchPage('GET_DETAIL', client.wechatId)" href="#Detail">Details / </a> -->
                 <a (click)="switchPage('EDIT_DETAIL', client.wechatId)" href="#Edit" >Edit</a>
               </td>
           </tr>
-          <tr *ngIf="!expanded && selectedClient.wechatId===client.wechatId">
+          <tr *ngIf="expanded && selectedClient.wechatId===client.wechatId">
             <td colspan='5'>
                 <ng-container>
                     <p-table [columns]="cols" [value]="selectedClientOrderHistory" class="order-table">
@@ -41,7 +40,7 @@
                         <ng-template pTemplate="body"  class="order-table-body" let-expanded="expanded" let-order>
                             <tr>
                             <td>${{order.income}}</td>
-                            <td>{{order.orderDate*1000 | date:'MM/dd/yyyy'}}</td>
+                            <td>{{order.orderDate | date:'MM/dd/yyyy'}}</td>
                             <td>{{order.info}}</td>
                             </tr>
                         </ng-template>
@@ -58,24 +57,23 @@
       <a (click)="switchPage('EDIT_DETAIL')" href="#">Edit Details >> </a>
   </div>
   </div>
-<div class="edit-modal">
+<div class="edit-modal" >
     <app-cig-modal
-        closeOnEscape="true"
         width="580"
         height="600"
         title="Edit Clients"
-        [(visible)]="displayModal && selectedClient"
+        [(visible)]="displayEditModal && selectedClient"
     >
     <div class="body-content" *ngIf="selectedClient">
-        <form>
+        <form #form="ngForm" (ngSubmit)="editSubmit(form.value)">
             <div class="form-group">
                 <label for="wechatId">WechatId </label> <i> {{selectedClient.wechatId}} </i>
             </div>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" required>
+                <input type="text" class="form-control"  name="name" value="{{selectedClient.name}}"> 
             </div>            
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="university">University</label>
                 <div>
                     <div><p-radioButton name="group2" value="Drexel" label="Drexel" [(ngModel)]="selectedClient.university" inputId="drexel"></p-radioButton></div>
@@ -83,22 +81,76 @@
                     <div><p-radioButton name="group2" value="Upenn" label="Upenn" [(ngModel)]="selectedClient.university" inputId="upenn"></p-radioButton></div>
                     <div><p-radioButton name="group2" value="Empty" label="Null" [(ngModel)]="university" inputId="empty"></p-radioButton></div>
                 </div>
-            </div>            
+            </div>             -->
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address">
+                <input type="text" class="form-control" name="address"  value="{{selectedClient.address}}">
             </div>
             <div class="form-group">
                 <label for="friends">Friends</label>
-                <input type="text" class="form-control" id="friends">
+                <input type="text" class="form-control" name="friend" value="{{selectedClient.friends}}">
             </div>
             <div class="form-group">
                 <label for="date">Created Date</label>
-                <p-calendar [(ngModel)]="date" name="date"></p-calendar>
+                    {{selectedClient.createdDate|date:'MM/dd/yyyy'}}
+                <p-calendar  name="createdate"></p-calendar> 
+            </div>
+            <div class="form-group">
+                <label for="date">Favourites </label>
+                <input type="text" class="form-control" name="favourites" value="{{selectedClient.favourites }}">
             </div>
             <button type="submit" class="btn btn-success">Submit</button>               
         </form>
-        <button (click)="displayModal = false">Close</button>
+        <button (click)="displayEditModal=false">Close</button>
     </div>
     </app-cig-modal>
 </div>
+
+<!-- <div class="create-modal">
+    <app-cig-modal
+        width="580"
+        height="600"
+        title="Create Clients"
+        [(visible)]="displayCreateModal"
+></app-cig-modal>
+    <div class="body-content">
+        <form #createForm="ngForm">
+            <div class="form-group">
+                <label for="wechatId">WechatId </label> 
+                <input type="text" class="form-control" id="wechatid" name="wechatid"> 
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label> 
+                <input type="text" class="form-control" id="name" name="name"> 
+            </div>
+            <div class="form-group">
+                <label for="university">University</label> 
+                <div>
+                    <div><p-radioButton name="group2" value="Drexel" label="Drexel" inputId="drexel"></p-radioButton></div>
+                    <div><p-radioButton name="group2" value="Temple" label="Temple"  inputId="temple"></p-radioButton></div>
+                    <div><p-radioButton name="group2" value="Upenn" label="Upenn"  inputId="upenn"></p-radioButton></div>
+                    <div><p-radioButton name="group2" value="Empty" label="Null" inputId="empty"></p-radioButton></div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address">
+                </div>
+                <div class="form-group">
+                    <label for="address">Created Date</label>
+                    <input type="text" class="form-control" id="date">
+                </div>
+                <div class="form-group">
+                        <label for="address">Friends</label>
+                        <input type="text" class="form-control" id="friend">
+                </div>
+                <div class="form-group">
+                    <label for="address">Gender</label>
+                    <input type="text" class="form-control" id="gender">
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>               
+
+        </form>
+    </div>
+    </app-cig-modal>
+</div> -->

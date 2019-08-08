@@ -24,7 +24,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class CigModalComponent implements OnInit {
   private _visible = false;
   private _alive = true;
-  @Input() closeOnEscape = true;
+  @Input() closeOnEscape = false;
   @Input() dismissableMask = true;
   @Input() modal = true;
   @Input() scrollable = true;

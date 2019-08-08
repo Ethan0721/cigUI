@@ -7,6 +7,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import {CigModalComponent} from '../../components/cig-modal/cig-modal.component';
+import { filter } from 'minimatch';
 
 @Component({
   selector: 'app-clients',
@@ -18,14 +19,16 @@ export class ClientsComponent implements OnInit {
   // private orderDetailFlag = false;
   private dropDownListFlag = false;
   public clients: Client[];
+  public filteredClientsMultiple: Client[];
   public selectedClient: Client;
   private selectedClientOrderHistory: OrderHistory[];
-  private favourites: any;
+  // private favourites: any;
   private clientAction = "CLIENT_LIST";
-  private expanded: boolean = true;
-  public displayModal : boolean = false;
+  private expanded: boolean = false;
+  public displayEditModal : boolean = false;
+  public displayCreateModal : boolean = false;
   public university: string = "Empty";
-
+  
   constructor(
     private clientsService: ClientsService,
     private router: Router,
@@ -42,7 +45,12 @@ export class ClientsComponent implements OnInit {
       })
   }
 
+  public filterClientMultiple(event) {
+    let query = event.query;
+    this.filteredClientsMultiple = this.filterCountry(query, this.clients);
+  }
   public initialClients(clients: Client[]) {
+    const TOP_FAVOURITES = 2;
     let self = this;
     this.clients = _.forEach(clients, function (client) {
       let clientObj, favourites = [];
@@ -61,8 +69,9 @@ export class ClientsComponent implements OnInit {
       _.forEach(favouritesArray, function(f){
         favourites.push(f[0]);
       });
+      let limitFavourite = favourites.slice(0, TOP_FAVOURITES);
+      client['favourites'] = limitFavourite;
       client['totalBought'] = totalBought;
-      client['favourites'] = favourites;
       // favourites = _.sortBy(favourites, function(f){
       //   return f.value;
       // })
@@ -86,32 +95,35 @@ export class ClientsComponent implements OnInit {
       "info": str,
       "cigMap": cigMap
     }
-    // console.log(str);
-    // console.log(cigMap);
     return result;
   }
-  // public openClientDetail(id: string){
-  //   console.info('open order details');
-  //   this.clientsService.getClientIdInfo(id)
-  //   .pipe(untilDestroyed(this))
-  //   .subscribe((res)=>{
-  //     if(res.data){
-  //       this.clientOrderHistory = res.data;
-  //     }
-  //   })
-  //   this.orderDetailFlag = !this.orderDetailFlag;
-  // }
+  
+  public filterCountry(query, clients: Client[]):any[] {
+    let filtered : Client[] = [];
+    for(let i = 0; i < clients.length; i++) {
+        let client = clients[i];
+        if(client.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(client);
+        }
+    }
+    return filtered;
+}
+
   public openDropDownList() {
     this.dropDownListFlag = !this.dropDownListFlag;
   }
   public expandRow(wechatId: string) {
-    this.expanded = !this.expanded;
-    if (!this.expanded) {
-      this.selectedClient = this.findSelectedClient(wechatId);
+    console.log(this.expanded);
+    this.selectedClient = this.findSelectedClient(wechatId);
       this.selectedClientOrderHistory =
       _.sortBy(this.selectedClient.orderHistory, function(orders){
         return orders.orderDate;
       }).reverse();
+    // console.log(this.expanded);
+    if (this.expanded) {
+      this.expanded =false;
+    }else{
+      this.expanded =true;
     }
   }
   public findSelectedClient(wechatId: string) {
@@ -122,7 +134,7 @@ export class ClientsComponent implements OnInit {
   public switchPage(value: string, wechatId: string) {
     this.selectedClient = this.findSelectedClient(wechatId);
     if (value === 'EDIT_DETAIL') {
-      this.openEditModal(wechatId);
+      this.openEditModal();
     }
     // if(this.clientAction === value){
     // }
@@ -130,11 +142,27 @@ export class ClientsComponent implements OnInit {
     //   this.clientAction = value;
     // }    
   }
-  public openEditModal(wechatId: string) {
+  public openEditModal() {
     console.log(this.selectedClient);
-    this.displayModal = true;
-    this.university = this.selectedClient.university ? this.selectedClient.university : "Empty"
-    //console.log(this.selectedClient);
+    if(this.displayEditModal){
+      this.university = this.selectedClient.university ? this.selectedClient.university : "Empty";
+    }
+      this.displayEditModal = !this.displayEditModal;
+  }
+  public openCreateModal() {
+    if(this.displayCreateModal){
+      this.university = this.selectedClient.university ? this.selectedClient.university : "Empty";
+    }
+    this.displayCreateModal = !this.displayCreateModal;
+  }
+  public createUser(){
+    console.log('Create A User');
+    this.displayCreateModal = !this.displayCreateModal;
+  }
+
+  public editSubmit(form) {
+    // this.value = form; 
+    console.log(form);
   }
   ngOnDestroy() { }
 }

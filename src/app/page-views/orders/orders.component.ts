@@ -5,10 +5,6 @@ import { OrderHistory } from '../../models/data.model';
 // import { orderDetail } from '../../models/data.model';
 import * as _ from 'lodash';
 
-// interface PerOrder {
-//   quantity: number;
-//   name: string;
-// }
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -17,13 +13,10 @@ import * as _ from 'lodash';
 export class OrdersComponent implements OnInit {
 
   public orderHistroy: OrderHistory[];
-  // orderDetail = [];
   cols : any[];
-  // orderMap = new Map();
   constructor(private orderService : OrdersService) {}
 
   ngOnInit() {
-    // let orderInfo=[];
     this.cols = [
       { field: 'date', header: 'Order Date' },
       { field: 'detail', header: 'Order Detail' },
