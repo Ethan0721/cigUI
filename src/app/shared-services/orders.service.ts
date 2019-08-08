@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class OrdersService {
-  private readonly baseUrl = 'http://localhost:3030';
+  private readonly baseUrl = 'https://thawing-brook-46832.herokuapp.com';
   constructor(private http: HttpClient) { }
 
   getOrders(){

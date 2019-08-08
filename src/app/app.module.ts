@@ -13,7 +13,7 @@ import { CigDropdownComponent } from './components/cig-dropdown/cig-dropdown.com
 import { PageViewsComponent } from './page-views/page-views.component';
 import { CigrattesComponent } from './page-views/cigrattes/cigrattes.component';
 import { CalendarModule } from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import {ToastModule} from 'primeng/toast';
@@ -24,6 +24,7 @@ import { CigModalComponent } from './components/cig-modal/cig-modal.component';
 import {DialogModule} from 'primeng/dialog';
 import { CigTextComponent } from './components/cig-text/cig-text.component';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 const appRoutes: Routes = [
   {path: '', component: PageViewsComponent},
@@ -62,6 +63,8 @@ const appRoutes: Routes = [
     ToastModule,
     TreeTableModule,
     DynamicDialogModule,
+    ReactiveFormsModule,
+    AutoCompleteModule,
     DialogModule,
     CalendarModule,
     [RouterModule.forRoot(appRoutes)],

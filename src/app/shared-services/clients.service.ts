@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClientsService {
-  private readonly baseUrl = 'http://localhost:3030';
+  private readonly baseUrl = 'https://thawing-brook-46832.herokuapp.com';
+  // private readonly baseUrl = 'http://localhost:3030';
 
   constructor(private http: HttpClient) { }
 
