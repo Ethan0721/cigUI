@@ -2,7 +2,7 @@ export interface Client {
     wechatId: string;
     name?: string;
     gender?: string;
-    orderHistory?: OrderHistory[];
+    orderHistory?: Order[];
     university?: string;
     address?: any;
     friends?: any;
@@ -11,7 +11,7 @@ export interface Client {
     favourites?: Cig[];
 }
 
-export interface OrderHistory{
+export interface Order{
     orderDate: Date | number;
     income: number;
     totalQuantity: number;

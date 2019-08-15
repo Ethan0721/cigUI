@@ -24,7 +24,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class CigModalComponent implements OnInit {
   private _visible = false;
   private _alive = true;
-  @Input() closeOnEscape = false;
   @Input() dismissableMask = true;
   @Input() modal = true;
   @Input() scrollable = true;
@@ -38,20 +37,21 @@ export class CigModalComponent implements OnInit {
       this._visible = value;
       this.visibleChange.emit(value);
     }
-    if(value){
-      document.body.classList.add('modal-open');
-    }else{
-      document.body.classList.remove('modal-open');
-    }
+    // if(value){
+    //   document.body.classList.add('modal-open');
+    // }
+    // else{
+    //   document.body.classList.remove('modal-open');
+    // }
   }
   get visible() : boolean {
     return this._visible;
   }
 
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter();
-  close(event : any){
-    this.visible = false;
-  }
+  // close(event : any){
+  //   this.visible = false;
+  // }
   constructor() { }
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class CigModalComponent implements OnInit {
     console.log('width:',this.width);
     // console.log('height', this.height);
     // console.log('width', this.width);
-    console.log('closeOnEscape', this.closeOnEscape);
+    // console.log('closeOnEscape', this.closeOnEscape);
   }
 
 }

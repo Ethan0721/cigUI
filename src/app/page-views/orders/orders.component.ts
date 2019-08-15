@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../shared-services/orders.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { OrderHistory } from '../../models/data.model';
+import { Order } from '../../models/data.model';
 // import { orderDetail } from '../../models/data.model';
 import * as _ from 'lodash';
 
@@ -12,8 +12,9 @@ import * as _ from 'lodash';
 })
 export class OrdersComponent implements OnInit {
 
-  public orderHistroy: OrderHistory[];
+  public orderHistroy: Order[];
   cols : any[];
+  public displayCreateModal : boolean = false;
   constructor(private orderService : OrdersService) {}
 
   ngOnInit() {
@@ -23,6 +24,7 @@ export class OrdersComponent implements OnInit {
       { field: 'income', header: 'Income' },      
       { field: 'user', header: 'User' },      
       { field: 'quantity', header: 'Total Quantity' },
+      { field: 'edit', header: 'Edit'}
     ];
     this.orderService.getOrders()
     .pipe(untilDestroyed(this))
@@ -40,6 +42,16 @@ export class OrdersComponent implements OnInit {
       })
       // console.log(this.orderHistroy);
     })
+  }
+  public openInsertOrderModal(){
+    console.log("Insert Order");
+    this.displayCreateModal = true;
+  } 
+  public editOrder(wechatId: string){
+    console.log("wechatId: ", wechatId);
+  }
+  public closeInsertOrderModal(){
+    this.displayCreateModal = false;
   }
   ngOnDestroy(){}
 
