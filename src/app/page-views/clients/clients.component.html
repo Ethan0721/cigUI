@@ -1,5 +1,5 @@
 <div class="get-client-list">
-    <a (click)="switchPage('CLIENT_LIST')" href="#">Client List >> </a>  <button (click)="createUser()">Create</button>
+    <a (click)="switchPage('CLIENT_LIST')" href="#">Client List >> </a>  <button (click)="openCreateModal()">Create</button>
     <p-table [columns]="cols" [value]="clients" *ngIf="clientAction==='CLIENT_LIST'" class="client-table">
       <ng-template pTemplate="header">
           <tr>
@@ -61,17 +61,18 @@
     <app-cig-modal
         width="580"
         height="600"
-        title="Edit Clients"
+        title="Edit Client"
         [(visible)]="displayEditModal && selectedClient"
     >
-    <div class="body-content" *ngIf="selectedClient">
-        <form #form="ngForm" (ngSubmit)="editSubmit(form.value)">
-            <div class="form-group">
+    <div class="body-content" >
+        <form #form="ngForm" (ngSubmit)="editSubmit(form)" *ngIf="selectedClient">
+            <!-- <div class="form-group">
                 <label for="wechatId">WechatId </label> <i> {{selectedClient.wechatId}} </i>
-            </div>
+            </div> -->
+            <b><i>{{selectedClient.wechatId}}</i></b>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control"  name="name" value="{{selectedClient.name}}"> 
+                <input type="text" class="form-control"  [ngModel]="selectedClient.name" name="name"> 
             </div>            
             <!-- <div class="form-group">
                 <label for="university">University</label>
@@ -84,11 +85,11 @@
             </div>             -->
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" name="address"  value="{{selectedClient.address}}">
+                <input type="text" class="form-control" [ngModel]="selectedClient.address" name="address" >
             </div>
             <div class="form-group">
                 <label for="friends">Friends</label>
-                <input type="text" class="form-control" name="friend" value="{{selectedClient.friends}}">
+                <input type="text" class="form-control" [ngModel]="selectedClient.friends" name="friend">
             </div>
             <div class="form-group">
                 <label for="date">Created Date</label>
@@ -96,15 +97,76 @@
                 <p-calendar  name="createdate"></p-calendar> 
             </div>
             <div class="form-group">
-                <label for="date">Favourites </label>
-                <input type="text" class="form-control" name="favourites" value="{{selectedClient.favourites }}">
+                <label for="date">Favourites: </label> {{selectedClient.favourites }}
+                <!-- <input type="text" class="form-control" ngModel name="favourites" [ngStyle]="{'width':'35%'}" value="{{selectedClient.favourites }}"> -->
             </div>
             <button type="submit" class="btn btn-success">Submit</button>               
         </form>
-        <button (click)="displayEditModal=false">Close</button>
+        <button (click)="closeEditModal(form)">Close</button>
     </div>
     </app-cig-modal>
 </div>
+
+<div class="create-modal" >
+    <app-cig-modal
+        width="580"
+        height="600"
+        title="Create Client"
+        [(visible)]="displayCreateModal"
+    >
+    <div class="body-content">
+        <form #form="ngForm" (ngSubmit)="createSubmit(form)">
+            <div class="form-group">
+                <label for="wechatId">WechatId</label> 
+                <input type="text" class="form-control" name="wechatId" ngModel required> 
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" ngModel> 
+            </div>            
+            <div class="form-group">
+                <label for="university">University</label>
+                <div>
+                    <div class="radio-button"><p-radioButton name="university" value="Drexel" label="Drexel" ngModel inputId="drexel"></p-radioButton></div>
+                    <div class="radio-button"><p-radioButton name="university" value="Temple" label="Temple" ngModel inputId="temple"></p-radioButton></div>
+                    <div class="radio-button"><p-radioButton name="university" value="Upenn" label="Upenn" ngModel inputId="upenn"></p-radioButton></div>
+                    <div class="radio-button"><p-radioButton name="university" value="" label="Null" ngModel inputId="empty"></p-radioButton></div>
+                </div>
+            </div>            
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" name="address" ngModel>
+            </div>
+            <div class="form-group">
+                <label for="friends">Friends</label>
+                <input type="text" class="form-control" name="friends" ngModel>
+            </div>
+            
+            <div class="form-group">
+                <div id="order-info">
+                    <!-- <p> Income </p>
+                    <p> Total Quality </p> -->
+                    <input type="text" ngModel name="income" placeholder="Income">
+                    <input type="text" ngModel name="total" placeholder="Total Quality">
+                    <a (click)="addOrder(client.wechatId)">Add Order</a>
+                    <!-- <div>
+                        <div class="radio-button"><p-radioButton name="country" value="Japan" label="Japan" ngModel inputId="Japan"></p-radioButton></div>
+                        <div class="radio-button"><p-radioButton name="country" value="China" label="China" ngModel inputId="China"></p-radioButton></div>
+                        <div class="radio-button"><p-radioButton name="country" value="Korean" label="Korean" ngModel inputId="Korean"></p-radioButton></div>
+                        <div class="radio-button"><p-radioButton name="country" value="USA" label="USA" ngModel inputId="USA"></p-radioButton></div>
+                    </div> -->
+                </div>        
+            </div>
+            
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>               
+        </form>
+        <button (click)="closeCreateModal(form)" >Close</button>
+    </div>
+    </app-cig-modal>
+</div>
+
+
+
 
 <!-- <div class="create-modal">
     <app-cig-modal
