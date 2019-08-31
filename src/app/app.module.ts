@@ -27,12 +27,15 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 
 const appRoutes: Routes = [
-  {path: '', component: PageViewsComponent},
+  {
+    path: '', component: PageViewsComponent
+  },
   {
     path: 'client',
     children:[
-      {path: '',component: ClientsComponent},
-      // {path: ':id', component: ClientDetailComponent}
+      {
+        path: '', component: ClientsComponent
+      },
     ]
   }
 ];
@@ -44,7 +47,6 @@ const appRoutes: Routes = [
     CigDropdownComponent,
     PageViewsComponent,
     CigrattesComponent,
-    // CustomToolsComponent,
     CigModalComponent,
     CigTextComponent,
     ],

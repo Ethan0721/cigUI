@@ -1,6 +1,6 @@
 <div class="get-client-list">
     <a (click)="switchPage('CLIENT_LIST')" href="#">Client List >> </a>  <button (click)="openCreateModal()">Create</button>
-    <p-table [columns]="cols" [value]="clients" *ngIf="clientAction==='CLIENT_LIST'" class="client-table">
+    <p-table [value]="clients" *ngIf="clientAction==='CLIENT_LIST'" class="client-table">
       <ng-template pTemplate="header">
           <tr>
               <th>WeChatId</th>
@@ -13,7 +13,7 @@
       <ng-template pTemplate="body" let-client>
           <tr>
               <td (click)="expandRow(client.wechatId)"> 
-                <!-- <i [ngClass]="!expanded ? 'fa fa-angle-down' : 'fa fa-angle-right'"  aria-hidden="true"></i> -->
+                <!-- <i [ngClass]="!expanded ? 'fa fa-angle-right' : 'fa fa-angle-down'"  aria-hidden="true"></i> -->
                 <i class='fa fa-angle-right'  aria-hidden="true"></i> 
                 &nbsp;
                  {{client.wechatId}}
@@ -29,7 +29,7 @@
           <tr *ngIf="expanded && selectedClient.wechatId===client.wechatId">
             <td colspan='5'>
                 <ng-container>
-                    <p-table [columns]="cols" [value]="selectedClientOrderHistory" class="order-table">
+                    <p-table [value]="selectedClient.orderHistory" class="order-table">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Income</th>
@@ -37,7 +37,7 @@
                                 <th>Details</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body"  class="order-table-body" let-expanded="expanded" let-order>
+                        <ng-template pTemplate="body"  class="order-table-body" let-order>
                             <tr>
                             <td>${{order.income}}</td>
                             <td>{{order.orderDate | date:'MM/dd/yyyy'}}</td>

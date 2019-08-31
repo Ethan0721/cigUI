@@ -50,8 +50,27 @@ export class OrdersComponent implements OnInit {
   public editOrder(wechatId: string){
     console.log("wechatId: ", wechatId);
   }
+  public addOrder(form){
+    const orderForm = form.form.value;
+    console.log("orderForm : ", orderForm);
+    this.orderService.addOrders(orderForm);
+
+  }
   public closeInsertOrderModal(){
     this.displayCreateModal = false;
+  }
+  public copyMessage(val: string){
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
   }
   ngOnDestroy(){}
 

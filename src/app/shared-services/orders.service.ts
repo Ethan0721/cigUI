@@ -13,5 +13,18 @@ export class OrdersService {
     let url = this.baseUrl + orderUrl; 
     return this.http.get(url);
   }
-  
+  addOrders(order){
+    const wechatId = order.wechatId;
+    const orderUrl = '/cig/usersorder/' + wechatId;
+    let url = this.baseUrl + orderUrl; 
+    // return this.http.get(url);
+
+    return this.http.post(url, order).subscribe( data => {
+      console.log("POST Request is successful ", data);
+    },
+    error=>{
+      console.log("ERROR ", error );
+    });
+  }
+
 }

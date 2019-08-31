@@ -58,8 +58,8 @@ export class CigModalComponent implements OnInit {
     // console.log('size', this.size);
     // this.height = SIZES[this.size] ? SIZES[this.size].height : this.height;
     // this.width = SIZES[this.size] ? SIZES[this.size].width : this.width;
-    console.log('height:',this.height);
-    console.log('width:',this.width);
+    // console.log('height:',this.height);
+    // console.log('width:',this.width);
     // console.log('height', this.height);
     // console.log('width', this.width);
     // console.log('closeOnEscape', this.closeOnEscape);

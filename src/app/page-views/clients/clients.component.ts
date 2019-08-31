@@ -31,6 +31,7 @@ export class ClientsComponent implements OnInit {
   public displayCreateModal : boolean = false;
   public university: string = "Empty";
   public orderList : Order[] = [];
+
   // public universityDropDownList : DropDownItem[] = [
   //   {id: 1, value:"Drexel", code:"DREXEL"},
   //   {id: 2, value:"Temple", code:"TEMPLE"},
@@ -39,7 +40,7 @@ export class ClientsComponent implements OnInit {
   constructor(
     private clientsService: ClientsService,
     private router: Router,
-    public dialogService: DialogService
+    public dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -116,14 +117,16 @@ export class ClientsComponent implements OnInit {
   public openDropDownList() {
     this.dropDownListFlag = !this.dropDownListFlag;
   }
-  public expandRow(wechatId: string) {
+  public expandRow(wechatId: string) {    
     this.selectedClient = this.findSelectedClient(wechatId);
-    if(this.selectedClient.orderHistory){
-      this.selectedClientOrderHistory =
-      _.sortBy(this.selectedClient.orderHistory, function(orders){
-        return orders.orderDate;
-      }).reverse();
-    }    
+    console.log('this.selectedClient : ', this.selectedClient);
+    console.log('Wecaht ID: ', wechatId);
+    // if(this.selectedClient.orderHistory){
+    //   this.selectedClientOrderHistory =
+    //   _.sortBy(this.selectedClient.orderHistory, function(orders){
+    //     return orders.orderDate;
+    //   }).reverse();
+    // }    
     this.expanded = !this.expanded;
   }
   public findSelectedClient(wechatId: string) {
@@ -164,9 +167,9 @@ export class ClientsComponent implements OnInit {
 
   public createSubmit(form){
     let client : Client = form.value;
-    this.clientsService.createClientInfo(client);
-    this.closeCreateModal;
+    this.clientsService.createClientInfo(client);    
     console.log("Submited: ", client);
+    this.closeCreateModal;
   }
 
   public editSubmit(form) {

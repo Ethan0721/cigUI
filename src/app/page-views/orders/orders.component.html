@@ -17,7 +17,11 @@
                 <td>${{order.income}}</td>    
                 <td>{{order.wechatId}}({{order.userName}})</td>              
                 <td>{{order.totalQuantity}}</td>
-                <td><a (click)="editOrder(order.wechatId)" href="#Edit" >Edit</a></td>
+                <td>
+                    <a  (click)="editOrder(order.wechatId)" href="#Edit">Edit</a>
+                    <span> / </span>
+                    <a  (click)="copyMessage(order.wechatId)" href="#Copy" value="click to copy"> Copy</a>
+                </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
@@ -31,37 +35,33 @@
         <app-cig-modal
             width="580"
             height="600"
-            title="Create Client"
+            title="Insert Order"
             [(visible)]="displayCreateModal"
         >
         <div class="body-content">
-            <form #form="ngForm" (ngSubmit)="createSubmit(form)">
+            <form #orderForm="ngForm" (ngSubmit)="createSubmit(orderForm)">
                 <div class="form-group">
                     <label for="wechatId">WechatId</label> 
                     <input type="text" class="form-control" name="wechatId" ngModel required> 
-                </div>
-                <!-- <div class="form-group">
-                    <label for="name">Income</label>
-                    <input type="text" class="form-control" name="income" ngModel> 
-                </div>                  
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="friends">Friends</label>
-                    <input type="text" class="form-control" name="friends" ngModel>
-                </div> -->
-                
+                </div>                
                 <div class="form-group">
                     <input type="text" ngModel name="income" placeholder="Income">
                     <input type="text" ngModel name="total" placeholder="Total Quality">
-                    <a (click)="addOrder(client.wechatId)">Add Order</a>
+                    <input type="text" ngModel name="country" placeholder="Country">
+                    <input type="text" ngModel name="count" placeholder="count">
+                    <input type="text" ngModel name="name" placeholder="name">
+                    <a (click)="addOrder(orderForm)">Add Order</a>
                 </div>
+
+                <!-- <div class="form-group">
+                    <input type="text" ngModel name="income" placeholder="Income">
+                    <input type="text" ngModel name="total" placeholder="Total Quality">
+                    <a (click)="addOrder(orderForm)">Add Order</a>
+                </div> -->
                 
-                <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>               
+                <button type="submit" class="btn btn-success" [disabled]="orderForm.invalid">Submit</button>               
             </form>
-            <button (click)="closeInsertOrderModal(form)">Close</button>
+            <button (click)="closeInsertOrderModal(orderForm)">Close</button>
         </div>
         </app-cig-modal>
     </div>
